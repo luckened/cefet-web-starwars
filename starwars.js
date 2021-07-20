@@ -6,6 +6,7 @@
 
 import { play } from "./music.js";
 import { restartAnimation } from "./restart-animation.js";
+import { friendlyFetch } from "./friendly-fetch.js";
 
 const API_ENDPOINT = "https://swapi.dev/api";
 
@@ -19,11 +20,7 @@ play(
     document.body
 );
 
-const films = await fetch(API_ENDPOINT + "/films/")
-    .then((item) => item.json())
-    .catch((err) => {
-        console.log(err);
-    });
+const films = await friendlyFetch(API_ENDPOINT + "/films/");
 
 const sortedFilms = films.results.sort((a, b) => (a.episode_id > b.episode_id ? 1 : -1));
 
